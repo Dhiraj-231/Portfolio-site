@@ -1,0 +1,187 @@
+@media screen and (max-width: 1367px) {
+  nav {
+    padding: 0 $p_md;
+  }
+
+  #home {
+    height: 100vh;
+    > section {
+      &:first-of-type {
+        padding-left: $p_md;
+        > div aside {
+          width: 85%;
+        }
+      }
+    }
+  }
+  #work {
+    padding: 8rem $p_md;
+    height: 110vh;
+    > section {
+      > article {
+        height: 20rem;
+        width: 90%;
+      }
+      .workItem {
+        padding: 2rem;
+        height: 20rem;
+        > aside {
+          > p {
+            margin: 1rem;
+          }
+          > a {
+            margin: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  #service {
+    padding: $p_md;
+    > section {
+      height: 90%;
+    }
+  }
+
+  #testimonial {
+    padding: $p_md;
+    > section {
+      width: 100%;
+    }
+  }
+
+  #contact {
+    > section > form {
+      > input,
+      > button {
+        font: 400 0.8rem $text1;
+        width: 50%;
+      }
+    }
+  }
+  footer {
+    padding-left: $p_md;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  nav {
+    padding: 0 $p_base;
+  }
+
+  #home {
+    height: 110vh;
+    > section {
+      &:first-of-type {
+        padding-left: $p_base;
+        > div {
+          > h1 {
+            font: 900 3rem $text1;
+          }
+          aside {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  #work {
+    padding: 8rem $p_base;
+  }
+
+  #service {
+    padding: $p_base_inverse;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  nav {
+    padding: 0 $p_sm;
+    > h2 {
+      font-size: 1.8rem;
+    }
+    > div {
+      gap: 1rem;
+    }
+  }
+
+  #home {
+    > section {
+      &:first-of-type {
+        padding-left: $p_sm;
+        > div {
+          > div {
+            gap: 2rem;
+            width: 100%;
+          }
+          aside {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
+  #work {
+    padding: 8rem $p_zero;
+    > section {
+      > article {
+        height: 25rem;
+      }
+      .workItem {
+        height: 25rem;
+      }
+    }
+  }
+
+  #service {
+    padding: $p_sm_inverse;
+    height: 90vh;
+  }
+
+  #testimonial {
+    padding: $p_zero;
+    >h2{
+        padding: 3rem;
+        margin-bottom: 0%;
+    }
+    > section {
+      padding: 3rem;
+      height: 45rem;
+      justify-content: space-evenly;
+    }
+    >article{
+        width:40%;
+        height: 50%;
+    }
+  }
+
+  #contact {
+    > section > form {
+        >h2{
+            font:100 2.3rem $text2;
+        }
+      > input,
+      > button {
+        width: 65%;
+      }
+    }
+  }
+  footer {
+    padding-left: $p_zero;
+    grid-template-columns: 1fr;
+    >div{
+        width: 100%;
+        border: none;
+        p{
+            width: 50%;
+            margin:2rem auto;
+        }
+        >a{
+            margin: 1rem;
+        }
+
+    }
+  }
+}
