@@ -1,57 +1,255 @@
 footer {
-    min-height: 100px;
-    background-color: $color6;
-    color: $color4;
-    padding: 6rem 0;
-    padding-left: $p;
-    display: grid;
-    grid-template-columns: 10fr 3fr 1fr;
+  width: 100%;
+  padding: clamp(3rem, 6vw, 5rem) $section-px clamp(2rem, 4vw, 3rem);
+  position: relative;
+  z-index: 1;
+
+  .ctaBand {
+    @include container;
+    @include glass;
+    @include card-shadow;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-items: center;
-    text-align: center;
-    > div {
-      width: 100%;
-      border-left: 2px solid $color4;
-      border-right: 2px solid $color4;
-      > img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: contain;
-      }
-  
-      > h2 {
-        margin: 1rem;
-      }
-      > p {
-        font: 400 1.2rem $text2;
-      }
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: clamp(1.8rem, 4vw, 2.6rem) clamp(1.8rem, 5vw, 3rem);
+    border-radius: $radius-lg;
+    background: linear-gradient(135deg, rgba($color-primary, 0.12), rgba($color-accent, 0.12));
+    margin-bottom: clamp(2.2rem, 5vw, 3.2rem);
+
+    h3 {
+      font: 800 1.5rem $text1;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.4rem;
+      @include gradient-text();
     }
-  
-    > aside > article {
-      margin-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      svg {
-        font-size: 2rem;
-        color: $color4;
-        &:hover {
-          color: $color3;
-        }
-      }
+
+    p {
+      font: 400 0.95rem $text2;
+      color: $color-text-muted;
     }
-  
-    > a {
-      width: 50px;
-      height: 50px;
-      background-color: $color4;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      svg {
-        font-size: 2rem;
-        color: $color3;
+
+    .ctaBtn {
+      flex-shrink: 0;
+      padding: 1rem 2.2rem;
+      border-radius: $radius-sm;
+      background: linear-gradient(135deg, $color-primary, $color-primary-light);
+      color: $color-white;
+      font: 700 0.95rem $text1;
+      letter-spacing: 0.3px;
+      transition: $transition;
+      @include card-shadow;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba($color-primary, 0.25);
       }
     }
   }
+
+  .footerMain {
+    @include container;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: clamp(2rem, 5vw, 3rem);
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid rgba($color-text, 0.08);
+
+    h4 {
+      font: 700 0.85rem $text1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: $color-text;
+      margin-bottom: 1.3rem;
+    }
+  }
+
+  .brandCol {
+    .brandRow {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 1rem;
+
+      > img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid $color-primary;
+        transition: $transition;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      > span {
+        font: 700 1.2rem $text1;
+        @include gradient-text();
+      }
+    }
+
+    .tagline {
+      font: 400 0.92rem $text2;
+      color: $color-text-muted;
+      margin-bottom: 0.8rem;
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font: 500 0.85rem $text2;
+      color: $color-text-muted;
+
+      svg {
+        color: $color-primary;
+      }
+    }
+  }
+
+  .linksCol .linksNav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.4rem;
+
+    a {
+      width: fit-content;
+      font: 500 0.92rem $text2;
+      color: $color-text-muted;
+      position: relative;
+      padding-bottom: 2px;
+      transition: $transition;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, $color-primary, $color-accent);
+        transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      &:hover {
+        color: $color-primary;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .connectCol .socialRow {
+    display: flex;
+    gap: 0.8rem;
+
+    a {
+      @include flex-center;
+      @include glass;
+      @include card-shadow;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      color: $color-primary;
+      font-size: 1.2rem;
+      transition: $transition;
+
+      &:hover {
+        transform: translateY(-4px);
+        background: linear-gradient(135deg, $color-primary, $color-accent);
+        color: $color-white;
+      }
+    }
+  }
+
+  .footerBottom {
+    @include container;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: clamp(1.5rem, 3vw, 2rem);
+
+    p {
+      font: 400 0.85rem $text2;
+      color: $color-text-muted;
+    }
+
+    .backToTop {
+      @include flex-center;
+      @include card-shadow;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid $color-primary;
+      background: linear-gradient(135deg, rgba($color-primary, 0.1), rgba($color-primary, 0.05));
+      color: $color-primary;
+      font-size: 1.4rem;
+      transition: $transition;
+
+      &:hover {
+        background: linear-gradient(135deg, rgba($color-primary, 0.2), rgba($color-primary, 0.1));
+        transform: translateY(-6px);
+        box-shadow: 0 15px 35px rgba($color-primary, 0.25);
+
+        svg {
+          transform: rotate(-45deg) scale(1.1);
+        }
+      }
+
+      svg {
+        transition: $transition;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    .ctaBand {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .footerMain {
+      grid-template-columns: 1fr;
+      gap: 2.2rem;
+      text-align: center;
+    }
+
+    .brandCol {
+      .brandRow,
+      .location {
+        justify-content: center;
+      }
+
+      .tagline {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .linksCol .linksNav {
+      justify-content: center;
+    }
+
+    .connectCol .socialRow {
+      justify-content: center;
+    }
+
+    .footerBottom {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}

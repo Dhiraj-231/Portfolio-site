@@ -1,68 +1,44 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { AiFillIeCircle, AiFillAndroid, AiFillWindows } from "react-icons/ai";
-let Service = () => {
-  const animations = {
-    whileInView: {
-      x: 0,
-      y: 0,
-      opacity: 1,
-    },
-    one: {
-      opacity: 0,
-      x: "-100%",
-    },
-    twoAndThree: {
-      opacity: 0,
-      y: "-100%",
-    },
-    four: {
-      opacity: 0,
-      x: "100%",
-    },
-  };
+import { FaReact, FaJava, FaDatabase } from "react-icons/fa";
+
+const highlights = [
+  {
+    stat: "5+",
+    label: "Custom CRM Systems Shipped",
+  },
+  {
+    icon: <FaReact />,
+    label: "Full-Stack Development (MERN)",
+  },
+  {
+    icon: <FaJava />,
+    label: "Java & Spring Boot Backend",
+  },
+  {
+    icon: <FaDatabase />,
+    label: "REST APIs & MongoDB Optimization",
+  },
+];
+
+const Service = () => {
   return (
     <div id="service">
-      <h2>Service</h2>
-      <section>
-        <motion.div
-          className="serviceBox1"
-          whileInView={animations.whileInView}
-          initial={animations.one}
-        >
-          <h3>1+</h3>
-          <p>Years of Experience</p>
-        </motion.div>
-
-        <motion.div
-          className="serviceBox2"
-          whileInView={animations.whileInView}
-          initial={animations.twoAndThree}
-        >
-          <AiFillIeCircle />
-          <span>Web Development</span>
-        </motion.div>
-
-        <motion.div
-          className="serviceBox3"
-          whileInView={animations.whileInView}
-          initial={animations.twoAndThree}
-          transition={{
-            delay:0.2,
-          }}
-        >
-          <AiFillAndroid />
-          <span>App Development</span>
-        </motion.div>
-
-        <motion.div
-          className="serviceBox4"
-          whileInView={animations.whileInView}
-          initial={animations.four}
-        >
-          <AiFillWindows />
-          <span>DeskTop Development</span>
-        </motion.div>
+      <h2>Highlights</h2>
+      <section className="highlightsGrid">
+        {highlights.map((item, index) => (
+          <motion.div
+            className="highlightCard"
+            key={item.label}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <span className="tile">{item.stat || item.icon}</span>
+            <p>{item.label}</p>
+          </motion.div>
+        ))}
       </section>
     </div>
   );

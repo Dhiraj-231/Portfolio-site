@@ -1,44 +1,147 @@
-nav{
-    width: 100%;
-    height: 100px;
-    background-color: $color1;
+nav {
+  width: 100%;
+  height: 80px;
+  @include glass;
+  @include card-shadow;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $section-px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: none;
+
+  .logo {
+    font-size: 1.7rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    @include gradient-text($color-primary, $color-primary-light);
+    z-index: 101;
+  }
+
+  .navLinks {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0px $p;
-    position: sticky;
-    top:0%;
-    z-index:60;
-    >h2{
-        font-size: 2rem;
-    }
-    >div{
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-        a{
-            color: $color6;
-            font-weight:500px;
-            transition: all 0.3s;
-            letter-spacing:1px;
-            &:hover{
-                color: $color3;
-            }
-        }
-    }
-    > a >button{
-        border: 1px solid $color6_1;
+    gap: clamp(1.2rem, 2.5vw, 2.5rem);
+
+    a:not(.emailLink) {
+      color: $color-text-muted;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: $transition;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 0;
+        height: 3px;
         border-radius: 10px;
-        padding: 0.5rem 2rem;
-        background-color: $color1;
-        cursor: pointer;
-        color: $color6;
-        letter-spacing: 1px;
-        font-weight: 500;
-        transition: all 0.3s;
-        &:hover{
-            background-color: $color6;
-            color:$color4;
+        background: linear-gradient(90deg, $color-primary, $color-accent);
+        transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      &:hover {
+        color: $color-primary;
+
+        &::after {
+          width: 100%;
         }
+      }
     }
+
+    .emailLink button {
+      border: 2px solid $color-primary;
+      border-radius: $radius-sm;
+      padding: 0.65rem 1.8rem;
+      background: linear-gradient(135deg, rgba($color-primary, 0.1), rgba($color-primary, 0.05));
+      cursor: pointer;
+      color: $color-primary;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: $transition;
+
+      &:hover {
+        background: linear-gradient(135deg, rgba($color-primary, 0.15), rgba($color-primary, 0.1));
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba($color-primary, 0.15);
+      }
+
+      &:active {
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 101;
+
+    span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      border-radius: 2px;
+      background: $color-primary;
+      transition: $transition;
+    }
+
+    &.open {
+      span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      span:nth-child(2) {
+        opacity: 0;
+      }
+      span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  nav {
+    .hamburger {
+      display: flex;
+    }
+
+    .navLinks {
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 2rem $section-px;
+      @include glass;
+      border-top: 1px solid rgba(255, 255, 255, 0.6);
+      transform: translateY(-10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: $transition;
+
+      &.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  }
 }

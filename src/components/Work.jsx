@@ -1,37 +1,47 @@
 import React from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import data from "../asserts/data.json"
-let Work = () => {
-  return (<div id="work">
-    <h2>WORK</h2>
-    <section>
-        <article>
-            <Carousel
-            showArrows={false}
-            showIndicators={false}
-            showStatus={false}
-            showThumbs={false}
-            interval={2000}
-            infiniteLoop={true}
-            autoPlay={true}
-            >
-            {data.projects.map((i) => (
-              <div key={i.title} className="workItem">
-                <img src={i.imgSrc} alt={i.title} />
-                <aside>
-                  <h3>{i.title}</h3>
-                  <p>{i.description}</p>
-                  <a target={"blank"} href={i.url}>
-                    View Demo
-                  </a>
-                </aside>
+import { motion } from "framer-motion";
+import { FiExternalLink } from "react-icons/fi";
+import data from "../asserts/data.json";
+
+const Work = () => {
+  return (
+    <div id="work">
+      <h2>Work</h2>
+      <div className="workGrid">
+        {data.projects.map((item, index) => (
+          <motion.article
+            className="workCard"
+            key={item.title}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: index * 0.12 }}
+          >
+            <div className="thumb">
+              <img src={item.imgSrc} alt={item.title} />
+              <div className="overlay">
+                <a href={item.url} target="_blank" rel="noreferrer" className="viewBtn">
+                  View Project <FiExternalLink />
+                </a>
               </div>
-            ))}
-            </Carousel>
-        </article>
-    </section>
-  </div>);
+            </div>
+
+            <div className="info">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <div className="techRow">
+                {item.tech.map((tech) => (
+                  <span className="techTag" key={tech}>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Work;

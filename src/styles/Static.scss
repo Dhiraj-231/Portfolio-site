@@ -1,22 +1,91 @@
-$text1:"Roboto,sans-serif";
-$text2:"Open Sans,sans-serif";
+// ==========================================================================
+// Design tokens — single source of truth for the whole site
+// ==========================================================================
 
-$color1:#f2f2f2;
-$color2:#286f6c;
-$color2_1:#174340;
-$color3:#f26440;
-$color3_light:rgb(249,141,141);
-$color3_1:#ad4126;
-$color4:#fff;
-$color5:#292b46;
-$color6:#161616;
-$color6_1:#16161698;
-$color6_2:#16161622;
+// Fonts
+$text1: "Roboto", sans-serif; // headings
+$text2: "Open Sans", sans-serif; // body
 
-$p:13.33vmax;
-$p_md:7vmax;
-$p_base:5vmax;
-$p_base_inverse:15vmax 10vmax;
-$p_sm:2vmax;
-$p_sm_inverse:13vmax 0vmax;
-$p_zero:0vmax
+// Palette — modern indigo / pink glass theme
+$color-bg: #f5f7fa;
+$color-bg-alt: #e0e7ff;
+$color-text: #1e2836;
+$color-text-muted: #64748b;
+$color-primary: #6366f1;
+$color-primary-light: #818cf8;
+$color-primary-dark: #4f46e5;
+$color-accent: #ec4899;
+$color-accent-light: #f472b6;
+$color-white: #ffffff;
+
+// Layout
+$container-width: 1280px;
+$section-px: clamp(1.25rem, 6vw, 6rem);
+$section-py: clamp(2.25rem, 5vw, 4rem);
+$radius-lg: 24px;
+$radius-md: 16px;
+$radius-sm: 10px;
+
+$transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+// ==========================================================================
+// Mixins
+// ==========================================================================
+
+@mixin container {
+  width: 100%;
+  max-width: $container-width;
+  margin: 0 auto;
+}
+
+@mixin glass {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+// Layered elevation: inner highlight (glass edge) + soft ambient shadow + tighter contact shadow.
+@mixin card-shadow {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 4px 12px rgba(30, 40, 54, 0.05),
+    0 16px 36px rgba(30, 40, 54, 0.09);
+  transition: $transition;
+}
+
+@mixin gradient-text($from: $color-primary, $to: $color-accent) {
+  background: linear-gradient(135deg, $from 0%, $to 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@mixin section-heading {
+  font: 700 clamp(2rem, 4vw, 3rem) $text1;
+  text-align: center;
+  letter-spacing: -0.5px;
+  margin-bottom: clamp(1.8rem, 4vw, 3rem);
+  @include gradient-text();
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin perspective {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+@mixin hover-lift($y: -10px, $rotate: 4deg) {
+  transition: $transition;
+
+  &:hover {
+    transform: translateY($y) rotateX($rotate);
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba($color-primary, 0.35);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 8px 20px rgba($color-primary, 0.08),
+      0 26px 50px rgba($color-primary, 0.2);
+  }
+}

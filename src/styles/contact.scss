@@ -1,60 +1,214 @@
 #contact {
-  min-height: 90vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  padding: $section-py $section-px;
+  position: relative;
+  z-index: 1;
+  @include perspective;
 
-  > section {
-    background-color: $color1;
-    width: 100%;
-    height: 100%;
+  > h2 {
+    @include section-heading;
+  }
 
-    > form {
+  .contactContainer {
+    @include container;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+
+  .contactIntro {
+    .eyebrow {
+      display: inline-block;
+      font: 700 0.8rem $text1;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: $color-primary;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font: 800 clamp(1.8rem, 3.4vw, 2.4rem) $text1;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      margin-bottom: 1.2rem;
+      @include gradient-text();
+    }
+
+    .lead {
+      font: 400 1.02rem $text2;
+      line-height: 1.8;
+      color: $color-text-muted;
+      margin-bottom: 2.2rem;
+      max-width: 440px;
+    }
+
+    .contactInfo {
+      list-style: none;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
+      gap: 1rem;
+      margin-bottom: 2.2rem;
 
-      > h2 {
-        text-align: center;
-        font: 100 2.7rem $text2;
-        letter-spacing: 5px;
-        text-transform: uppercase;
-        margin: 2rem;
+      li {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font: 600 0.98rem $text2;
+        color: $color-text;
+
+        svg {
+          font-size: 1.2rem;
+          color: $color-primary;
+          flex-shrink: 0;
+        }
+
+        a {
+          color: $color-text;
+          transition: color 0.3s;
+
+          &:hover {
+            color: $color-primary;
+          }
+        }
       }
-      > input,>button {
-        padding: 0.8rem;
-        width: 40%;
-        outline: none;
-        font: 400 0.9rem $text1;
-        margin: 1rem;
-        border: none;
-      }
-      >button{
-        cursor: pointer;
-        background-color: $color3;
-        color: $color4;
-        font: 600 1rem $text1;
-        text-transform: uppercase;
-        margin: 3rem;
-        &:hover{
-            background-color: $color3_1;
+    }
+
+    .socialRow {
+      display: flex;
+      gap: 1rem;
+
+      a {
+        width: 48px;
+        height: 48px;
+        @include flex-center;
+        @include glass;
+        @include card-shadow;
+        border-radius: 50%;
+        color: $color-primary;
+        font-size: 1.3rem;
+
+        &:hover {
+          transform: translateY(-5px);
+          background: linear-gradient(135deg, $color-primary, $color-accent);
+          color: $color-white;
         }
       }
     }
   }
-  >aside{
-    width: 100%;
-    height: 100%;
-    background-color: $color5;
-    display: grid;
-    place-items: center;
-    >img{
-        height: 70%;
-        width: 70%;
-        object-fit: contain;
-        filter: drop-shadow(0 0 10 rgba(0,0,0,0.15)) hue-rotate(150deg);
-        animation: upupdowndown 0.7 infinite linear alternate;
+
+  .contactForm {
+    @include glass;
+    @include card-shadow;
+    border-radius: $radius-lg;
+    padding: clamp(2rem, 4vw, 3rem);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: min(320px, 70%);
+      aspect-ratio: 1 / 1;
+      background: radial-gradient(circle, rgba($color-accent, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      top: -10%;
+      right: -10%;
+      z-index: 0;
+      animation: pulse-animation 6s ease-in-out infinite;
+    }
+
+    .formRow {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+
+      > input {
+        flex: 1 1 180px;
+      }
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      margin: 0.55rem 0;
+      outline: none;
+      font: 400 1rem $text2;
+      border: 2px solid rgba($color-primary, 0.18);
+      background: rgba($color-primary, 0.05);
+      border-radius: $radius-sm;
+      color: $color-text;
+      transition: $transition;
+      position: relative;
+      z-index: 1;
+
+      &::placeholder {
+        color: rgba($color-text, 0.5);
+      }
+
+      &:focus {
+        border-color: $color-primary;
+        background: rgba($color-primary, 0.1);
+        box-shadow: 0 0 20px rgba($color-primary, 0.1);
+      }
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+      font-family: $text2;
+    }
+
+    > button {
+      cursor: pointer;
+      width: 100%;
+      margin-top: 0.8rem;
+      background: linear-gradient(135deg, $color-primary, $color-primary-light);
+      color: $color-white;
+      font: 700 1rem $text1;
+      letter-spacing: 0.5px;
+      padding: 1.1rem;
+      border: none;
+      border-radius: $radius-sm;
+      transition: $transition;
+      position: relative;
+      z-index: 1;
+      @include card-shadow;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba($color-primary, 0.25);
+      }
+
+      &:active {
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  #contact .contactContainer {
+    grid-template-columns: 1fr;
+  }
+
+  #contact .contactIntro {
+    text-align: center;
+
+    .lead {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contactInfo li {
+      justify-content: center;
+    }
+
+    .socialRow {
+      justify-content: center;
     }
   }
 }

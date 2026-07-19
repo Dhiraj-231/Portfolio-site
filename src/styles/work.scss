@@ -1,65 +1,125 @@
-#work{
-    width: 100%;
-    height: 100vh;
-    margin-top: 10rem;
-    padding:8rem $p;
-    >h2{
-        font: 700 2.5rem $text2;
-        width: fit-content;
-        border-bottom: 1px solid $color6_1;
-        padding: 0.5rem;
-        margin: auto;
-    }
-    >section{
-        margin-top: 4rem;
-        width:100%;
+#work {
+  width: 100%;
+  padding: $section-py $section-px;
+  position: relative;
+  z-index: 1;
+
+  > h2 {
+    @include section-heading;
+  }
+
+  .workGrid {
+    @include container;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    align-items: stretch;
+  }
+
+  .workCard {
+    @include glass;
+    @include card-shadow;
+    @include perspective;
+    @include hover-lift(-10px, 3deg);
+    display: flex;
+    flex-direction: column;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    cursor: pointer;
+
+    .thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+
+      > img {
+        width: 100%;
         height: 100%;
-        color:$color3_1;
-        background-color: $color5;
+        object-fit: cover;
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .overlay {
+        position: absolute;
+        inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-    >article{
-        width:70%;
-        height:25vmax;
-    }
-    .workItem{
-        overflow-y:auto ;
-        height: 25vmax;
-        width:95%;
-        margin: auto;
-        background-color: $color4;
-        display: flex;
-        padding: 2rem;
-        box-shadow: 0 0 20px 5px $color1;
-        >img{
-            border-radius: 20px;
-            width:40%;
-            object-fit: cover;
-        }
-        >aside{
-            width: 60%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        background: linear-gradient(135deg, rgba($color-primary, 0.85), rgba($color-accent, 0.85));
+        opacity: 0;
+        transition: opacity 0.4s ease;
 
-            >p{
-                letter-spacing: 3px;
-                line-height: 180%;
-                margin: 2rem;
-            }
-            >a{
-                background-color: $color3;
-                padding: 0.7rem 2rem;
-                margin: 2rem;
-                color: $color4;
-                transition: all 0.5s;
-                &:hover{
-                    background-color: $color3_1;
-                }
-            }
+        .viewBtn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          padding: 0.8rem 1.8rem;
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.95);
+          color: $color-primary-dark;
+          font: 700 0.92rem $text1;
+          letter-spacing: 0.3px;
+          transform: translateY(12px);
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+          svg {
+            font-size: 1rem;
+          }
         }
+      }
     }
+
+    &:hover {
+      .thumb {
+        > img {
+          transform: scale(1.08);
+        }
+
+        .overlay {
+          opacity: 1;
+
+          .viewBtn {
+            transform: translateY(0);
+          }
+        }
+      }
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      padding: clamp(1.5rem, 3vw, 2rem);
+      flex: 1;
+
+      > h3 {
+        font: 700 1.25rem $text1;
+        @include gradient-text();
+      }
+
+      > p {
+        font: 400 0.92rem $text2;
+        line-height: 1.7;
+        color: $color-text-muted;
+        flex: 1;
+      }
+
+      .techRow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+
+        .techTag {
+          padding: 0.35rem 0.8rem;
+          border-radius: 999px;
+          font: 600 0.75rem $text2;
+          color: $color-primary-dark;
+          background: rgba($color-primary, 0.08);
+          border: 1px solid rgba($color-primary, 0.18);
+        }
+      }
+    }
+  }
 }
